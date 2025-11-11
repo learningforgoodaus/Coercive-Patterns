@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coercive Control Patterns</title>
+    <!-- Tailwind CSS for utility classes and responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import Inter font and define brand colors */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        :root {
+            --color-primary: #513873;       /* Deep Purple */
+            --color-secondary: #C6B4D9;     /* Light Purple/Lavender */
+            --color-text: #413659;          /* Darker Deep Purple */
+            --color-background: #F2F2F2;    /* Off-white */
+            --color-accent: #9C7F9D;        /* Muted Rose/Mauve */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            padding: 20px;
+        }
+
+        /* Main container styling */
+        .accordion-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Accordion item styling */
+        .accordion-item {
+            border-bottom: 1px solid var(--color-background);
+        }
+        
+        /* The first item needs a rounded top */
+        .accordion-item:first-child .accordion-header {
+            border-radius: 12px 12px 0 0;
+        }
+        
+        /* The last item needs a rounded bottom */
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+        .accordion-item:last-child .accordion-content {
+            border-radius: 0 0 12px 12px;
+        }
+
+
+        /* Accordion header (button) styling */
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 16px 24px;
+            text-align: left;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+        
+        .accordion-header:hover {
+            background-color: var(--color-background);
+        }
+        
+        .accordion-header.active {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        /* Numbered circle styling */
+        .accordion-number {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+            color: white;
+            font-weight: 700;
+            margin-right: 15px;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-number {
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+        }
+
+        /* Arrow icon styling */
+        .accordion-arrow {
+            margin-left: auto;
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Accordion content styling */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding: 0 24px;
+        }
+
+        /* Style for the introductory text paragraph */
+        .accordion-content .accordion-intro-text {
+            padding: 15px 0 10px 45px; 
+            margin: 0;
+            font-size: 1rem;
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+        
+        /* Styling for the UL list (Dot Points) */
+        .accordion-content .accordion-list {
+            list-style-type: disc;
+            padding: 0 24px 24px 45px; 
+            margin: 0 0 0 20px;
+            border-left: 3px solid var(--color-secondary);
+            margin-left: 15px;
+        }
+        
+        .accordion-content .accordion-list li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+        
+        /* Mobile list adjustments */
+        @media (max-width: 640px) {
+            .accordion-content .accordion-intro-text {
+                padding: 10px 0 5px 30px;
+            }
+            .accordion-content .accordion-list {
+                padding: 0 10px 15px 30px;
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="accordion-container">
+        <!-- Accordion for the Three Coercive Control Patterns -->
+        <div id="accordion-list">
+            <!-- Content will be generated here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Consolidated data into three patterns with bullet points
+        const sectionsData = [
+            { 
+                id: 'pervasive', 
+                title: 'Constant and Pervasive', 
+                intro: 'This pattern works by slowly stripping away the victim\'s freedom and making her totally reliant on the abuser. This involves:',
+                points: [
+                    'Controlling what she does, who she talks to, and where she goes (<b>Isolation</b>).',
+                    'Stopping her from working or managing family money (<b>Economic Abuse</b>).',
+                    'Acting like the \'master of the house\' who has the right to make all the big decisions (<b>Male Privilege</b>).'
+                ]
+            },
+            { 
+                id: 'threat', 
+                title: 'Reinforced by Threat', 
+                intro: 'The abuser uses fear to ensure the victim follows the rules, often without any physical violence needed. This is achieved by:',
+                points: [
+                    'Making threats to hurt her, commit suicide, or report her to authorities (<b>Coercion & Threats</b>).',
+                    'Making her scared by smashing things or abusing pets (<b>Intimidation</b>).',
+                    'Putting her down, calling her names, or playing mind games (<b>Emotional Abuse</b>), which constantly keeps her in a state of anxiety.'
+                ]
+            },
+            { 
+                id: 'blame', 
+                title: 'Designed to Blame the Victim', 
+                intro: 'A key part of the pattern is making the victim believe the abuse is her fault. This includes:',
+                points: [
+                    'Making light of the abuse or saying it never happened (<b>Minimising, Denying, & Blaming</b>).',
+                    'Shifting responsibility for their own behaviour onto her.',
+                    'Using the children to control or manipulate her, making her feel guilty or threatening to take the children away (<b>Using Children</b>).'
+                ]
+            }
+        ];
+
+        const accordionList = document.getElementById('accordion-list');
+
+        // Dynamically create the accordion items
+        sectionsData.forEach((section, index) => {
+            const item = document.createElement('div');
+            item.className = 'accordion-item';
+
+            const header = document.createElement('button');
+            header.className = 'accordion-header';
+            header.setAttribute('aria-expanded', 'false');
+            header.setAttribute('aria-controls', `content-${section.id}`);
+            header.onclick = toggleAccordion;
+
+            const number = document.createElement('span');
+            number.className = 'accordion-number';
+            number.textContent = index + 1;
+
+            const title = document.createElement('span');
+            title.textContent = section.title;
+
+            const arrow = document.createElement('span');
+            arrow.className = 'accordion-arrow';
+            arrow.textContent = '>'; // Unicode arrow/chevron
+
+            header.appendChild(number);
+            header.appendChild(title);
+            header.appendChild(arrow);
+
+            const content = document.createElement('div');
+            content.className = 'accordion-content';
+            content.id = `content-${section.id}`;
+            content.setAttribute('aria-hidden', 'true');
+
+            // 1. Intro sentence
+            const introP = document.createElement('p');
+            introP.className = 'accordion-intro-text';
+            introP.innerHTML = section.intro;
+            content.appendChild(introP);
+
+            // 2. List of points
+            const ul = document.createElement('ul');
+            ul.className = 'accordion-list';
+            section.points.forEach(point => {
+                const li = document.createElement('li');
+                li.innerHTML = point;
+                ul.appendChild(li);
+            });
+            content.appendChild(ul);
+            
+            item.appendChild(header);
+            item.appendChild(content);
+            accordionList.appendChild(item);
+        });
+
+        // Function to toggle the accordion content
+        function toggleAccordion(event) {
+            const header = event.currentTarget;
+            const content = header.nextElementSibling;
+            const isExpanded = header.classList.contains('active');
+
+            // Close all other items
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                if (h !== header && h.classList.contains('active')) {
+                    h.classList.remove('active');
+                    h.setAttribute('aria-expanded', 'false');
+                    const c = h.nextElementSibling;
+                    c.style.maxHeight = 0;
+                    c.setAttribute('aria-hidden', 'true');
+                }
+            });
+
+            // Toggle current item
+            if (isExpanded) {
+                header.classList.remove('active');
+                header.setAttribute('aria-expanded', 'false');
+                content.style.maxHeight = 0;
+                content.setAttribute('aria-hidden', 'true');
+            } else {
+                header.classList.add('active');
+                header.setAttribute('aria-expanded', 'true');
+                // Set max-height to scroll height to allow smooth transition
+                // Add the height of the intro text and the list + padding
+                const contentHeight = content.querySelector('.accordion-intro-text').offsetHeight + 
+                                      content.querySelector('.accordion-list').offsetHeight;
+                content.style.maxHeight = (contentHeight + 50) + "px"; // 50px buffer for padding
+                content.setAttribute('aria-hidden', 'false');
+            }
+        }
+        
+        // Fix for max-height calculation on resize or initial load
+        window.addEventListener('resize', () => {
+             document.querySelectorAll('.accordion-header.active').forEach(h => {
+                 const content = h.nextElementSibling;
+                 if (content) {
+                     // Recalculate and re-apply max-height if content is currently active
+                     const contentHeight = content.querySelector('.accordion-intro-text').offsetHeight + 
+                                           content.querySelector('.accordion-list').offsetHeight;
+                     content.style.maxHeight = (contentHeight + 50) + "px";
+                 }
+            });
+        });
+        
+    </script>
+</body>
+</html>
